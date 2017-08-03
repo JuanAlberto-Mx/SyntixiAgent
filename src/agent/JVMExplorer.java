@@ -1,4 +1,4 @@
-package syntixi.instrumentation.agent;
+package agent;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

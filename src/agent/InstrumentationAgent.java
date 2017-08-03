@@ -1,4 +1,4 @@
-package syntixi.instrumentation.agent;
+package agent;
 
 import java.lang.instrument.Instrumentation;
 
@@ -22,8 +22,9 @@ public class InstrumentationAgent {
      * <code>main</code> method execution.
      */
     public static void init() {
-        if (instrumentation == null)
+        if (instrumentation == null) {
             AgentLoader.loadAgent();
+        }
 
         setAllLoadedClasses();
         setSystemClassLoaderInitiatedClasses();

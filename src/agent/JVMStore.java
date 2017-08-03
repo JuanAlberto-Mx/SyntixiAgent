@@ -1,4 +1,4 @@
-package syntixi.instrumentation.agent;
+package agent;
 
 /**
  * <code>JVMStore</code> class stores all the information related to classes loaded in

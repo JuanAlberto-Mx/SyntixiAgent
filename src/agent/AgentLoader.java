@@ -1,4 +1,4 @@
-package syntixi.instrumentation.agent;
+package agent;
 
 import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.AgentLoadException;
@@ -24,7 +24,9 @@ public class AgentLoader {
      * @return the agent path.
      */
     private static String getAgentPath() {
-        String agentPath = System.getProperty("user.dir") + File.separator + "syntixi" + File.separator + "instrumentation" + File.separator + "agent" + File.separator + "syntixiAgent.jar";
+        String agentPath = System.getProperty("user.dir") + File.separator + "lib" + File.separator + "syntixiAgent.jar";
+
+        System.out.println("[Syntixi Agent]\tPath:\t" + agentPath);
 
         return agentPath;
     }
@@ -33,14 +35,18 @@ public class AgentLoader {
      * Loads the <code>Java</code> agent in the <code>Java Virtual Machine</code>.
      */
     public static void loadAgent() {
+        System.out.println("[Syntixi Agent]\tLoading agent");
+
         String beanName = ManagementFactory.getRuntimeMXBean().getName();
         int endIndex = beanName.indexOf('@');
         String pid = beanName.substring(0, endIndex);
 
+        System.out.println("[Syntixi Agent]\tCurrent JVM:\t" + beanName + "\tPid:\t" + pid);
+
         try {
             VirtualMachine virtualMachine = VirtualMachine.attach(pid);
 
-            virtualMachine.loadAgent(getAgentPath());
+            virtualMachine.loadAgent(getAgentPath(), null);
             virtualMachine.detach();
         }
         catch(AttachNotSupportedException | IOException | AgentLoadException | AgentInitializationException e) {
