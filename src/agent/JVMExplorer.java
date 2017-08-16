@@ -1,5 +1,8 @@
 package agent;
 
+import string.Levenshtein;
+import string.Similarity;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -57,7 +60,7 @@ public class JVMExplorer {
 
         for(Class cls : JVMStore.getAllLoadedClasses()) {
             for(Method method : cls.getDeclaredMethods()) {
-                if(method.getName().contains(userRequirement)) {
+                if(Levenshtein.similarity(method.getName(), userRequirement) >= Similarity.getPercentageSimilarity()) {
                     compatibleMethod = method;
                     break;
                 }
