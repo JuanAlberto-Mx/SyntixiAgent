@@ -26,7 +26,7 @@ public class AgentLoader {
     private static String getAgentPath() {
         String agentPath = System.getProperty("user.dir") + File.separator + "lib" + File.separator + "syntixiAgent.jar";
 
-        System.out.println("[Syntixi Agent]\tPath:\t" + agentPath);
+        System.out.println("[SýntixiAgent]\tPath:\t" + agentPath);
 
         return agentPath;
     }
@@ -35,13 +35,13 @@ public class AgentLoader {
      * Loads the <code>Java</code> agent in the <code>Java Virtual Machine</code>.
      */
     public static void loadAgent() {
-        System.out.println("[Syntixi Agent]\tLoading agent");
+        System.out.println("[SýntixiAgent]\tLoading agent");
 
         String beanName = ManagementFactory.getRuntimeMXBean().getName();
         int endIndex = beanName.indexOf('@');
         String pid = beanName.substring(0, endIndex);
 
-        System.out.println("[Syntixi Agent]\tCurrent JVM:\t" + beanName + "\tPid:\t" + pid);
+        System.out.println("[SýntixiAgent]\tCurrent JVM:\t" + beanName + "\tPid:\t" + pid);
 
         try {
             VirtualMachine virtualMachine = VirtualMachine.attach(pid);
